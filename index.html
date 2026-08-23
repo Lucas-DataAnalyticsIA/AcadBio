@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AcadBio — Consultoria Acadêmica e Científica</title>
+<meta name="description" content="Consultoria acadêmica e científica em todo o Brasil: orientação para TCC, projetos de pesquisa, mestrado, doutorado, artigos científicos, revisão textual e normalização ABNT.">
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-950:#0c2141;
+    --navy-900:#153a6c;
+    --navy-800:#1e4d8c;
+    --navy-700:#2a5fa3;
+    --gold-600:#c1841c;
+    --gold-500:#e6a83b;
+    --gold-300:#f2cc84;
+    --paper:#faf8f3;
+    --paper-2:#f2ede0;
+    --ink:#1c2230;
+    --ink-soft:#5a6072;
+    --line:#e2dbca;
+    --shadow: 0 20px 50px -25px rgba(12,33,65,.35);
+    --serif: 'Lora', Georgia, serif;
+    --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --mono: 'JetBrains Mono', 'Courier New', monospace;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:var(--sans);
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img{max-width:100%; display:block;}
+  a{color:inherit; text-decoration:none;}
+  ul{list-style:none;}
+  section{position:relative;}
+  .wrap{
+    width:100%;
+    max-width:1140px;
+    margin:0 auto;
+    padding:0 28px;
+  }
+  ::selection{background:var(--gold-300); color:var(--navy-950);}
+
+  h1,h2,h3,h4{
+    font-family:var(--serif);
+    font-weight:600;
+    color:var(--navy-950);
+    letter-spacing:-0.01em;
+  }
+
+  .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-family:var(--mono);
+    font-size:12.5px;
+    font-weight:600;
+    letter-spacing:.04em;
+    color:var(--gold-600);
+    margin-bottom:16px;
+  }
+  .eyebrow .idx{
+    color:var(--navy-800);
+    border:1px solid var(--line);
+    background:#fff;
+    border-radius:3px;
+    padding:2px 7px;
+  }
+
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:9px;
+    padding:14px 26px;
+    border-radius:5px;
+    font-family:var(--sans);
+    font-weight:600;
+    font-size:15px;
+    letter-spacing:.01em;
+    cursor:pointer;
+    border:1px solid transparent;
+    transition:transform .18s ease, box-shadow .18s ease, background .18s ease, color .18s ease;
+    white-space:nowrap;
+  }
+  .btn svg{width:18px; height:18px; flex-shrink:0;}
+  .btn-primary{
+    background:var(--navy-900);
+    color:#fff;
+    box-shadow:0 12px 24px -12px rgba(21,58,108,.55);
+  }
+  .btn-primary:hover{background:var(--navy-950); transform:translateY(-2px);}
+  .btn-ghost{
+    background:transparent;
+    color:var(--navy-950);
+    border-color:var(--navy-950);
+  }
+  .btn-ghost:hover{background:var(--navy-950); color:#fff; transform:translateY(-2px);}
+  .btn-gold{
+    background:var(--gold-500);
+    color:var(--navy-950);
+    box-shadow:0 12px 24px -12px rgba(198,140,30,.55);
+  }
+  .btn-gold:hover{background:var(--gold-600); transform:translateY(-2px);}
+
+  /* ---------- reveal on scroll ---------- */
+  .reveal{opacity:0; transform:translateY(22px); transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1; transform:none; transition:none;}
+    html{scroll-behavior:auto;}
+  }
+
+  /* ---------- laurel divider ---------- */
+  .laurel-divider{
+    display:flex; align-items:center; justify-content:center; gap:14px;
+    margin:0 auto; width:100%; max-width:340px;
+    color:var(--gold-500);
+    opacity:.85;
+  }
+  .laurel-divider svg{flex-shrink:0;}
+  .laurel-divider .dot{
+    width:6px; height:6px; border-radius:50%; background:var(--gold-500);
+  }
+
+  /* ================= HEADER ================= */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:1000;
+    background:rgba(250,248,243,.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid transparent;
+    transition:border-color .25s ease, box-shadow .25s ease, background .25s ease;
+  }
+  header.scrolled{
+    border-bottom-color:var(--line);
+    box-shadow:0 8px 24px -20px rgba(12,33,65,.4);
+  }
+  .nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 28px;
+    max-width:1180px; margin:0 auto;
+  }
+  .brand{display:flex; align-items:center; gap:11px;}
+  .brand img{width:38px; height:38px;}
+  .brand-name{
+    font-family:var(--serif); font-weight:700; font-size:20px;
+    letter-spacing:.03em; color:var(--navy-950);
+  }
+  .brand-name span{color:var(--gold-600);}
+  .nav-links{
+    display:flex; align-items:center; gap:34px;
+  }
+  .nav-links a{
+    font-size:14.5px; font-weight:500; color:var(--ink-soft);
+    position:relative; padding:4px 0;
+    transition:color .2s ease;
+  }
+  .nav-links a:hover{color:var(--navy-950);}
+  .nav-links a::after{
+    content:''; position:absolute; left:0; bottom:-2px; width:0; height:1.5px;
+    background:var(--gold-500); transition:width .25s ease;
+  }
+  .nav-links a:hover::after{width:100%;}
+  .nav-cta{display:flex; align-items:center; gap:14px;}
+  .nav-cta .btn{padding:10px 20px; font-size:13.5px;}
+  .burger{
+    display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:6px;
+  }
+  .burger span{width:24px; height:2px; background:var(--navy-950); border-radius:2px; transition:.25s;}
+
+  /* ================= HERO ================= */
+  .hero{
+    padding:168px 0 110px;
+    background:
+      radial-gradient(ellipse 900px 500px at 82% -10%, rgba(230,168,59,.13), transparent 60%),
+      radial-gradient(ellipse 700px 500px at -10% 20%, rgba(21,58,108,.07), transparent 60%);
+    overflow:hidden;
+    position:relative;
+  }
+  .hero-grid{
+    display:grid; grid-template-columns:1.05fr .95fr; gap:64px; align-items:center;
+  }
+  .hero h1{
+    font-size:clamp(34px, 4.4vw, 54px);
+    line-height:1.12;
+    margin-bottom:22px;
+  }
+  .hero h1 em{
+    font-style:italic; color:var(--gold-600);
+  }
+  .hero p.lede{
+    font-size:17.5px; color:var(--ink-soft); max-width:520px; margin-bottom:34px;
+  }
+  .hero-actions{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:38px;}
+  .trust-row{
+    display:flex; gap:26px; flex-wrap:wrap; padding-top:26px; border-top:1px solid var(--line);
+  }
+  .trust-item{display:flex; align-items:center; gap:9px; font-size:13.5px; color:var(--ink-soft); font-weight:500;}
+  .trust-item svg{width:17px; height:17px; color:var(--gold-600); flex-shrink:0;}
+
+  .hero-art{
+    position:relative;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .hero-card{
+    position:relative;
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:14px;
+    box-shadow:var(--shadow);
+    padding:40px 36px;
+    width:100%;
+    max-width:400px;
+  }
+  .hero-card::before{
+    content:'';
+    position:absolute; inset:-1px;
+    border-radius:14px;
+    padding:1px;
+    background:linear-gradient(135deg, var(--gold-500), transparent 40%);
+    -webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite:xor; mask-composite:exclude;
+    pointer-events:none;
+  }
+  .hero-card .quote-mark{
+    font-family:var(--serif); font-size:60px; color:var(--gold-300); line-height:.5; margin-bottom:14px; display:block;
+  }
+  .hero-card blockquote{
+    font-family:var(--serif); font-style:italic; font-size:19px; color:var(--navy-950); line-height:1.5; margin-bottom:22px;
+  }
+  .hero-card .ref{
+    font-family:var(--mono); font-size:12px; color:var(--ink-soft); letter-spacing:.02em;
+    border-top:1px dashed var(--line); padding-top:14px;
+  }
+  .hero-card img.logo-mini{
+    width:56px; position:absolute; top:-24px; right:-18px; filter:drop-shadow(0 10px 18px rgba(12,33,65,.25));
+  }
+
+  /* ================= SECTION HEADS ================= */
+  .section{padding:100px 0;}
+  .section-head{
+    max-width:640px; margin-bottom:56px;
+  }
+  .section-head h2{font-size:clamp(28px,3vw,38px); margin-bottom:16px;}
+  .section-head p{color:var(--ink-soft); font-size:16px;}
+  .section-alt{background:var(--paper-2);}
+
+  /* ================= SOBRE ================= */
+  .about-grid{
+    display:grid; grid-template-columns:.85fr 1.15fr; gap:60px; align-items:start;
+  }
+  .about-figure{
+    background:var(--navy-950);
+    border-radius:14px;
+    padding:38px 32px;
+    color:#fff;
+    position:relative;
+    overflow:hidden;
+  }
+  .about-figure::after{
+    content:'';
+    position:absolute; right:-40px; bottom:-40px; width:180px; height:180px;
+    border:1px solid rgba(230,168,59,.35); border-radius:50%;
+  }
+  .about-figure::before{
+    content:'';
+    position:absolute; right:10px; bottom:10px; width:100px; height:100px;
+    border:1px solid rgba(230,168,59,.2); border-radius:50%;
+  }
+  .about-figure .big{
+    font-family:var(--serif); font-size:15px; line-height:1.7; color:rgba(255,255,255,.88); position:relative; z-index:1;
+  }
+  .about-figure .sig{
+    margin-top:26px; padding-top:20px; border-top:1px solid rgba(255,255,255,.18);
+    font-family:var(--mono); font-size:12px; color:var(--gold-300); letter-spacing:.03em; position:relative; z-index:1;
+  }
+  .about-copy p{color:var(--ink-soft); margin-bottom:18px; font-size:16px;}
+  .about-copy p:last-child{margin-bottom:0;}
+  .about-copy strong{color:var(--navy-950); font-weight:600;}
+  .about-tags{display:flex; flex-wrap:wrap; gap:10px; margin-top:26px;}
+  .about-tags span{
+    font-family:var(--mono); font-size:12px; color:var(--navy-800);
+    background:#fff; border:1px solid var(--line); border-radius:4px; padding:7px 12px;
+  }
+  .team-block{margin-top:42px; padding-top:30px; border-top:1px solid var(--line);}
+  .team-block h3{font-size:21px; margin-bottom:7px;}
+  .team-intro{color:var(--ink-soft); font-size:14px; margin-bottom:20px;}
+  .team-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:14px;}
+  .team-card{background:#fff; border:1px solid var(--line); border-radius:9px; overflow:hidden;}
+  .team-photo{
+    aspect-ratio:1 / 1; background:var(--paper-2); color:var(--gold-600);
+    display:flex; align-items:center; justify-content:center;
+    font-family:var(--mono); font-size:11px; text-transform:uppercase; letter-spacing:.05em;
+    position:relative; overflow:hidden;
+    width:100%; padding:0; border:0; cursor:zoom-in;
+    transition:filter .2s ease;
+  }
+  .team-photo:hover{filter:brightness(.94);}
+  .team-photo img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover;}
+  .team-card figcaption{padding:12px 13px 14px;}
+  .team-card strong{display:block; color:var(--navy-950); font-family:var(--serif); font-size:15px;}
+  .team-card span{display:block; color:var(--ink-soft); font-size:12px; margin-top:2px;}
+
+  /* ================= SERVIÇOS ================= */
+  .services-groups{
+    display:grid; grid-template-columns:repeat(2,1fr); gap:26px;
+  }
+  .svc-group{
+    background:#fff; border:1px solid var(--line); border-radius:12px;
+    padding:30px 28px; transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  }
+  .svc-group:hover{transform:translateY(-4px); box-shadow:var(--shadow); border-color:var(--gold-300);}
+  .svc-head{display:flex; align-items:center; gap:14px; margin-bottom:18px;}
+  .svc-icon{
+    width:44px; height:44px; border-radius:9px; background:var(--paper-2);
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+    color:var(--navy-900);
+  }
+  .svc-icon svg{width:22px; height:22px;}
+  .svc-head h3{font-size:18px;}
+  .svc-group ul li{
+    display:flex; gap:10px; font-size:14.5px; color:var(--ink-soft);
+    padding:9px 0; border-top:1px dashed var(--line);
+  }
+  .svc-group ul li:first-child{border-top:none;}
+  .svc-group ul li .n{
+    font-family:var(--mono); font-size:11.5px; color:var(--gold-600); flex-shrink:0; margin-top:2px;
+  }
+
+  /* ================= PARA QUEM ================= */
+  .audience-grid{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:20px;
+  }
+  .audience-card{
+    background:#fff; border:1px solid var(--line); border-radius:12px; padding:26px 22px;
+    text-align:left;
+  }
+  .audience-card .num{
+    font-family:var(--mono); font-size:12px; color:var(--gold-600); display:block; margin-bottom:14px;
+  }
+  .audience-card h4{font-size:16.5px; margin-bottom:9px; font-family:var(--serif);}
+  .audience-card p{font-size:13.8px; color:var(--ink-soft);}
+
+  /* ================= COMO FUNCIONA ================= */
+  .process{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:0; position:relative;
+  }
+  .process::before{
+    content:''; position:absolute; top:23px; left:6%; right:6%; height:1px;
+    background:repeating-linear-gradient(90deg, var(--line) 0 8px, transparent 8px 14px);
+  }
+  .process-step{position:relative; padding-right:20px;}
+  .process-step .badge{
+    width:46px; height:46px; border-radius:50%; background:var(--navy-950); color:var(--gold-300);
+    display:flex; align-items:center; justify-content:center;
+    font-family:var(--mono); font-weight:600; font-size:15px;
+    position:relative; z-index:1; margin-bottom:20px;
+    box-shadow:0 10px 20px -10px rgba(12,33,65,.5);
+  }
+  .process-step h4{font-size:16.5px; margin-bottom:8px;}
+  .process-step p{font-size:13.8px; color:var(--ink-soft);}
+
+  /* ================= DEPOIMENTO / CTA FAIXA ================= */
+  .cta-strip{
+    background:var(--navy-950);
+    color:#fff;
+    border-radius:16px;
+    padding:56px 50px;
+    display:flex; align-items:center; justify-content:space-between; gap:40px;
+    position:relative; overflow:hidden;
+  }
+  .cta-strip::after{
+    content:'';
+    position:absolute; top:-60px; right:-60px; width:220px; height:220px;
+    border:1px solid rgba(230,168,59,.28); border-radius:50%;
+  }
+  .cta-strip h3{color:#fff; font-size:26px; max-width:440px; margin-bottom:10px;}
+  .cta-strip p{color:rgba(255,255,255,.72); font-size:14.5px; max-width:420px;}
+  .cta-strip-actions{display:flex; gap:14px; flex-shrink:0; position:relative; z-index:1;}
+
+  /* ================= CONTATO ================= */
+  .contact-grid{
+    display:grid; grid-template-columns:1fr 1fr; gap:26px;
+  }
+  .contact-card{
+    background:#fff; border:1px solid var(--line); border-radius:14px; padding:36px 32px;
+    display:flex; flex-direction:column; height:100%;
+  }
+  .contact-card .ico{
+    width:50px; height:50px; border-radius:12px; display:flex; align-items:center; justify-content:center; margin-bottom:20px;
+  }
+  .contact-card.wpp .ico{background:#e8f7ef; color:#1f9254;}
+  .contact-card.insta .ico{background:linear-gradient(135deg,#fde5c6,#f3c7de); color:#b93b8f;}
+  .contact-card .ico svg{width:24px; height:24px;}
+  .contact-card h3{font-size:19px; margin-bottom:10px;}
+  .contact-card p{color:var(--ink-soft); font-size:14.5px; margin-bottom:24px; flex-grow:1;}
+
+  /* ================= FOOTER ================= */
+  footer{
+    background:var(--navy-950); color:rgba(255,255,255,.65);
+    padding:64px 0 26px;
+  }
+  .footer-grid{
+    display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:50px;
+    padding-bottom:40px; border-bottom:1px solid rgba(255,255,255,.12);
+  }
+  .footer-brand{display:flex; align-items:center; gap:10px; margin-bottom:16px;}
+  .footer-brand img{width:32px;}
+  .footer-brand span{font-family:var(--serif); font-weight:700; font-size:18px; color:#fff;}
+  .footer-col h5{
+    font-family:var(--mono); font-size:12px; letter-spacing:.06em; color:var(--gold-300);
+    margin-bottom:16px; text-transform:uppercase;
+  }
+  .footer-col ul li{margin-bottom:10px; font-size:14px;}
+  .footer-col ul li a:hover{color:#fff;}
+  .footer-note{font-size:13.5px; max-width:340px; line-height:1.7;}
+  .footer-bottom{
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;
+    padding-top:26px; font-size:12.5px; color:rgba(255,255,255,.45);
+  }
+
+  /* ================= WHATSAPP FLOAT ================= */
+  .wpp-float{
+    position:fixed; right:22px; bottom:22px; z-index:900;
+    width:58px; height:58px; border-radius:50%;
+    background:#25D366; color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 14px 30px -10px rgba(37,211,102,.6);
+    transition:transform .2s ease;
+  }
+  .wpp-float:hover{transform:scale(1.08);}
+  .wpp-float svg{width:28px; height:28px;}
+
+  .photo-modal{
+    position:fixed; inset:0; z-index:1100; padding:30px;
+    display:flex; align-items:center; justify-content:center;
+    background:rgba(12,33,65,.88); opacity:0; visibility:hidden;
+    transition:opacity .2s ease, visibility .2s ease;
+  }
+  .photo-modal.open{opacity:1; visibility:visible;}
+  .photo-modal img{max-width:min(900px, 92vw); max-height:84vh; object-fit:contain; border-radius:8px; box-shadow:0 24px 70px rgba(0,0,0,.4);}
+  .photo-modal-close{
+    position:absolute; top:20px; right:24px; width:42px; height:42px;
+    display:flex; align-items:center; justify-content:center; border:1px solid rgba(255,255,255,.45);
+    border-radius:50%; background:rgba(12,33,65,.45); color:#fff; font-size:27px; line-height:1; cursor:pointer;
+  }
+  .photo-modal-close:hover{background:var(--gold-500); color:var(--navy-950);}
+
+  /* ================= RESPONSIVE ================= */
+  @media (max-width:980px){
+    .hero-grid{grid-template-columns:1fr; gap:52px;}
+    .hero-art{order:-1; max-width:360px; margin:0 auto;}
+    .about-grid{grid-template-columns:1fr; gap:36px;}
+    .team-grid{max-width:560px;}
+    .services-groups{grid-template-columns:1fr;}
+    .audience-grid{grid-template-columns:repeat(2,1fr);}
+    .process{grid-template-columns:repeat(2,1fr); row-gap:36px;}
+    .process::before{display:none;}
+    .contact-grid{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr; gap:30px;}
+    .cta-strip{flex-direction:column; text-align:center; align-items:center;}
+    .cta-strip p{margin:0 auto;}
+  }
+  @media (max-width:760px){
+    .nav-links{
+      position:fixed; top:70px; left:0; right:0; bottom:0;
+      background:var(--paper); flex-direction:column; align-items:flex-start; gap:0;
+      padding:10px 28px 30px; transform:translateY(-110%); opacity:0;
+      transition:transform .3s ease, opacity .3s ease; pointer-events:none;
+    }
+    .nav-links.open{transform:translateY(0); opacity:1; pointer-events:auto;}
+    .nav-links a{width:100%; padding:14px 0; border-bottom:1px solid var(--line);}
+    .nav-cta .btn-ghost{display:none;}
+    .burger{display:flex;}
+    .section{padding:72px 0;}
+    .hero{padding-top:130px;}
+  }
+  @media (max-width:560px){
+    .audience-grid{grid-template-columns:1fr;}
+    .process{grid-template-columns:1fr;}
+    .team-grid{grid-template-columns:repeat(2,1fr);}
+    .cta-strip{padding:40px 26px;}
+    .trust-row{gap:16px;}
+  }
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <div class="nav">
+    <a href="#top" class="brand">
+      <img src="logo.png" alt="AcadBio">
+      <span class="brand-name">Acad<span>Bio</span></span>
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#sobre">Quem somos</a>
+      <a href="#servicos">Serviços</a>
+      <a href="#para-quem">Para quem</a>
+      <a href="#como-funciona">Como funciona</a>
+      <a href="#contato">Contato</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="#contato" class="btn btn-ghost">Contato</a>
+      <a id="navWppBtn" href="#" target="_blank" rel="noopener" class="btn btn-primary">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.29-.15-1.7-.84-1.97-.93-.26-.1-.46-.15-.65.15-.2.29-.75.93-.92 1.12-.17.2-.34.22-.63.08-.29-.15-1.22-.45-2.32-1.43-.86-.76-1.44-1.71-1.6-2-.17-.29-.02-.45.13-.6.13-.13.29-.34.44-.51.15-.17.2-.29.29-.48.1-.2.05-.37-.02-.51-.08-.15-.65-1.57-.9-2.15-.24-.57-.48-.5-.65-.5-.17 0-.37-.02-.56-.02-.2 0-.51.07-.78.37-.26.29-1.02 1-1.02 2.43 0 1.43 1.05 2.82 1.19 3.01.15.2 2.06 3.14 4.99 4.4.7.3 1.24.48 1.67.61.7.22 1.34.19 1.84.12.56-.08 1.7-.7 1.94-1.37.24-.68.24-1.26.17-1.37-.07-.12-.26-.2-.55-.34z"/><path d="M12.02 2C6.5 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.06-1.33A9.94 9.94 0 0 0 12.02 22C17.53 22 22 17.52 22 12S17.53 2 12.02 2zm0 18.1c-1.68 0-3.24-.47-4.57-1.28l-.33-.2-3.02.79.8-2.95-.21-.34a8.06 8.06 0 0 1-1.24-4.29c0-4.48 3.65-8.12 8.14-8.12 4.48 0 8.13 3.64 8.13 8.12 0 4.48-3.65 8.27-8.7 8.27z"/></svg>
+        WhatsApp
+      </a>
+    </div>
+    <button class="burger" id="burgerBtn" aria-label="Abrir menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy reveal">
+        <span class="eyebrow"><span class="idx">est.</span> Consultoria acadêmica e científica</span>
+        <h1>Sua pesquisa merece <em>rigor</em>, clareza e um bom orientador ao lado.</h1>
+        <p class="lede">A AcadBio presta consultoria acadêmica em todo o Brasil: da estrutura do TCC à defesa de mestrado e doutorado, do primeiro rascunho à normalização ABNT. Atendimento individual, online e sob sigilo.</p>
+        <div class="hero-actions">
+          <a id="heroWppBtn" href="#" target="_blank" rel="noopener" class="btn btn-primary">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.29-.15-1.7-.84-1.97-.93-.26-.1-.46-.15-.65.15-.2.29-.75.93-.92 1.12-.17.2-.34.22-.63.08-.29-.15-1.22-.45-2.32-1.43-.86-.76-1.44-1.71-1.6-2-.17-.29-.02-.45.13-.6.13-.13.29-.34.44-.51.15-.17.2-.29.29-.48.1-.2.05-.37-.02-.51-.08-.15-.65-1.57-.9-2.15-.24-.57-.48-.5-.65-.5-.17 0-.37-.02-.56-.02-.2 0-.51.07-.78.37-.26.29-1.02 1-1.02 2.43 0 1.43 1.05 2.82 1.19 3.01.15.2 2.06 3.14 4.99 4.4.7.3 1.24.48 1.67.61.7.22 1.34.19 1.84.12.56-.08 1.7-.7 1.94-1.37.24-.68.24-1.26.17-1.37-.07-.12-.26-.2-.55-.34z"/><path d="M12.02 2C6.5 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.06-1.33A9.94 9.94 0 0 0 12.02 22C17.53 22 22 17.52 22 12S17.53 2 12.02 2zm0 18.1c-1.68 0-3.24-.47-4.57-1.28l-.33-.2-3.02.79.8-2.95-.21-.34a8.06 8.06 0 0 1-1.24-4.29c0-4.48 3.65-8.12 8.14-8.12 4.48 0 8.13 3.64 8.13 8.12 0 4.48-3.65 8.27-8.7 8.27z"/></svg>
+            Solicitar orçamento
+          </a>
+          <a href="#servicos" class="btn btn-ghost">Ver serviços</a>
+        </div>
+        <div class="trust-row">
+          <div class="trust-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 3 6v6c0 5 3.8 8.7 9 10 5.2-1.3 9-5 9-10V6l-9-4Z"/></svg>
+            Sigilo e ética acadêmica
+          </div>
+          <div class="trust-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M2 12h20M12 2c2.5 2.7 4 6.2 4 10s-1.5 7.3-4 10c-2.5-2.7-4-6.2-4-10s1.5-7.3 4-10Z"/></svg>
+            Atendimento em todo o Brasil
+          </div>
+          <div class="trust-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v14H7l-3 3V4Z"/></svg>
+            100% online
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-art reveal">
+        <div class="hero-card">
+          <img src="logo.png" class="logo-mini" alt="">
+          <span class="quote-mark">&ldquo;</span>
+          <blockquote>Metodologia clara e texto bem estruturado não são detalhes — são o que sustenta uma pesquisa.</blockquote>
+          <div class="ref">AcadBio — Consultoria Acadêmica e Científica</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SOBRE ============ -->
+  <section class="section" id="sobre">
+    <div class="wrap">
+      <div class="about-grid">
+        <div class="about-figure reveal">
+          <p class="big">"Cada pesquisa tem um argumento central — nosso trabalho é ajudar você a defendê-lo com clareza, método e as referências certas."</p>
+          <div class="sig">AcadBio · Consultoria Acadêmica</div>
+        </div>
+        <div class="about-copy reveal">
+          <span class="eyebrow"><span class="idx">01</span> Quem somos</span>
+          <h2 style="font-size:32px; margin-bottom:20px;">Consultoria acadêmica pensada para cada etapa da sua trajetória científica</h2>
+          <p>A <strong>AcadBio</strong> é uma consultoria acadêmica e científica que atende, de forma 100% online, estudantes e pesquisadores de todo o Brasil — da graduação à pós-graduação stricto sensu.</p>
+          <p>Unimos <strong>experiência acadêmica</strong> em ciências biomédicas e produção científica a um acompanhamento próximo e individualizado, para transformar ideias soltas em trabalhos bem estruturados, metodologicamente consistentes e dentro das normas exigidas.</p>
+          <p>Trabalhamos com trabalhos de conclusão de curso, projetos de pesquisa, pré-projetos para mestrado e doutorado, artigos científicos, revisão textual e normalização ABNT — sempre com prazos, escopo e orçamento definidos antes de começar.</p>
+          <div class="about-tags">
+            <span>Metodologia científica</span>
+            <span>Normas ABNT</span>
+            <span>Área da saúde</span>
+            <span>Mestrado &amp; doutorado</span>
+            <span>Atendimento nacional</span>
+          </div>
+          <div class="team-block">
+            <h3>Responsáveis pelo serviço</h3>
+            <p class="team-intro">Conheça quem acompanha cada etapa do seu trabalho.</p>
+            <div class="team-grid">
+              <figure class="team-card">
+                <button class="team-photo" type="button" aria-label="Ampliar foto do responsável 1"><span>Adicionar foto</span><img src="responsavel-1.png" alt="Foto do responsável 1" onerror="this.style.display='none'"></button>
+                <figcaption><strong>Jordana Sarkis</strong><span>Consultora acadêmica na AcadBio</span></figcaption>
+              </figure>
+              <figure class="team-card">
+                <button class="team-photo" type="button" aria-label="Ampliar foto do responsável 2"><span>Adicionar foto</span><img src="responsavel-2.png" alt="Foto do responsável 2" onerror="this.style.display='none'"></button>
+                <figcaption><strong>Ogla Anakarina</strong><span>Sócia, Mentora e Consultora Acadêmica na AcadBio</span></figcaption>
+              </figure>
+              <figure class="team-card">
+                <button class="team-photo" type="button" aria-label="Ampliar foto do responsável 3"><span>Adicionar foto</span><img src="responsavel-3.png" alt="Foto do responsável 3" onerror="this.style.display='none'"></button>
+                <figcaption><strong>Bruno Nascimento</strong><span>Mentor e consultor Acadêmico na AcadBio</span></figcaption>
+              </figure>
+              <figure class="team-card">
+                <button class="team-photo" type="button" aria-label="Ampliar foto do responsável 4"><span>Adicionar foto</span><img src="responsavel-4.png" alt="Foto do responsável 4" onerror="this.style.display='none'"></button>
+                <figcaption><strong>Suelen Cristina</strong><span>Mentora e Consultora Acadêmica na AcadBio</span></figcaption>
+              </figure>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SERVIÇOS ============ -->
+  <section class="section section-alt" id="servicos">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow"><span class="idx">02</span> O que fazemos</span>
+        <h2>Serviços</h2>
+        <p>Um catálogo objetivo de apoio acadêmico, organizado por etapa da sua pesquisa — do rascunho inicial à publicação.</p>
+      </div>
+
+      <div class="services-groups">
+
+        <div class="svc-group reveal">
+          <div class="svc-head">
+            <div class="svc-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5"/></svg>
+            </div>
+            <h3>Trabalhos de Conclusão &amp; Pesquisa</h3>
+          </div>
+          <ul>
+            <li><span class="n">01</span> Consultoria e orientação para TCC</li>
+            <li><span class="n">02</span> Elaboração e orientação de projetos de pesquisa</li>
+            <li><span class="n">03</span> Apoio na estruturação metodológica de pesquisas</li>
+          </ul>
+        </div>
+
+        <div class="svc-group reveal">
+          <div class="svc-head">
+            <div class="svc-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg>
+            </div>
+            <h3>Pós-graduação</h3>
+          </div>
+          <ul>
+            <li><span class="n">04</span> Suporte em pré-projetos para Mestrado e Doutorado</li>
+            <li><span class="n">05</span> Apoio em editais</li>
+          </ul>
+        </div>
+
+        <div class="svc-group reveal">
+          <div class="svc-head">
+            <div class="svc-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+            </div>
+            <h3>Produção Científica</h3>
+          </div>
+          <ul>
+            <li><span class="n">06</span> Orientação e estruturação de artigos científicos</li>
+            <li><span class="n">07</span> Revisão textual e acadêmica</li>
+            <li><span class="n">08</span> Normalização e adequação às normas ABNT</li>
+            <li><span class="n">09</span> Formatação de trabalhos acadêmicos</li>
+          </ul>
+        </div>
+
+        <div class="svc-group reveal">
+          <div class="svc-head">
+            <div class="svc-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+            </div>
+            <h3>Consultoria Especializada</h3>
+          </div>
+          <ul>
+            <li><span class="n">10</span> Consultoria para estudantes da área da saúde</li>
+            <li><span class="n">11</span> Consultoria acadêmica e científica personalizada</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PARA QUEM ============ -->
+  <section class="section" id="para-quem">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow"><span class="idx">03</span> Público</span>
+        <h2>Para quem é a AcadBio</h2>
+        <p>Atendemos diferentes momentos da vida acadêmica — sempre com o mesmo nível de atenção e rigor.</p>
+      </div>
+      <div class="audience-grid">
+        <div class="audience-card reveal">
+          <span class="num">[ A ]</span>
+          <h4>Graduandos</h4>
+          <p>Estudantes em fase de TCC que precisam de direção clara, cronograma e metodologia.</p>
+        </div>
+        <div class="audience-card reveal">
+          <span class="num">[ B ]</span>
+          <h4>Pós-graduandos</h4>
+          <p>Mestrandos e doutorandos estruturando pré-projetos, qualificações e capítulos da tese.</p>
+        </div>
+        <div class="audience-card reveal">
+          <span class="num">[ C ]</span>
+          <h4>Área da saúde</h4>
+          <p>Estudantes e profissionais de saúde com demandas específicas de pesquisa clínica e científica.</p>
+        </div>
+        <div class="audience-card reveal">
+          <span class="num">[ D ]</span>
+          <h4>Pesquisadores</h4>
+          <p>Quem precisa de apoio metodológico, revisão de artigos ou suporte para editais e submissões.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COMO FUNCIONA ============ -->
+  <section class="section section-alt" id="como-funciona">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow"><span class="idx">04</span> Processo</span>
+        <h2>Como funciona</h2>
+        <p>Um processo simples, transparente e sem letras miúdas — do primeiro contato ao acompanhamento contínuo.</p>
+      </div>
+      <div class="process">
+        <div class="process-step reveal">
+          <div class="badge">01</div>
+          <h4>Contato inicial</h4>
+          <p>Você conta, pelo WhatsApp, sobre seu projeto, sua etapa atual e sua necessidade.</p>
+        </div>
+        <div class="process-step reveal">
+          <div class="badge">02</div>
+          <h4>Diagnóstico</h4>
+          <p>Avaliamos o material existente e definimos o escopo exato do apoio necessário.</p>
+        </div>
+        <div class="process-step reveal">
+          <div class="badge">03</div>
+          <h4>Plano de trabalho</h4>
+          <p>Você recebe cronograma e orçamento personalizados, antes de qualquer compromisso.</p>
+        </div>
+        <div class="process-step reveal">
+          <div class="badge">04</div>
+          <h4>Acompanhamento</h4>
+          <p>Orientação contínua, com retornos claros, até a entrega e defesa do seu trabalho.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA FAIXA ============ -->
+  <section class="section" style="padding-top:0;">
+    <div class="wrap reveal">
+      <div class="cta-strip">
+        <div>
+          <h3>Pronto para dar o próximo passo na sua pesquisa?</h3>
+          <p>Fale agora pelo WhatsApp e receba uma avaliação inicial, sem compromisso.</p>
+        </div>
+        <div class="cta-strip-actions">
+          <a id="ctaWppBtn" href="#" target="_blank" rel="noopener" class="btn btn-gold">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.29-.15-1.7-.84-1.97-.93-.26-.1-.46-.15-.65.15-.2.29-.75.93-.92 1.12-.17.2-.34.22-.63.08-.29-.15-1.22-.45-2.32-1.43-.86-.76-1.44-1.71-1.6-2-.17-.29-.02-.45.13-.6.13-.13.29-.34.44-.51.15-.17.2-.29.29-.48.1-.2.05-.37-.02-.51-.08-.15-.65-1.57-.9-2.15-.24-.57-.48-.5-.65-.5-.17 0-.37-.02-.56-.02-.2 0-.51.07-.78.37-.26.29-1.02 1-1.02 2.43 0 1.43 1.05 2.82 1.19 3.01.15.2 2.06 3.14 4.99 4.4.7.3 1.24.48 1.67.61.7.22 1.34.19 1.84.12.56-.08 1.7-.7 1.94-1.37.24-.68.24-1.26.17-1.37-.07-.12-.26-.2-.55-.34z"/><path d="M12.02 2C6.5 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.06-1.33A9.94 9.94 0 0 0 12.02 22C17.53 22 22 17.52 22 12S17.53 2 12.02 2zm0 18.1c-1.68 0-3.24-.47-4.57-1.28l-.33-.2-3.02.79.8-2.95-.21-.34a8.06 8.06 0 0 1-1.24-4.29c0-4.48 3.65-8.12 8.14-8.12 4.48 0 8.13 3.64 8.13 8.12 0 4.48-3.65 8.27-8.7 8.27z"/></svg>
+            Falar no WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTATO ============ -->
+  <section class="section" id="contato">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow"><span class="idx">05</span> Contato</span>
+        <h2>Vamos conversar sobre a sua pesquisa</h2>
+        <p>Atendimento direto, sem intermediários. Escolha o canal de sua preferência.</p>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-card wpp reveal">
+          <div class="ico">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.29-.15-1.7-.84-1.97-.93-.26-.1-.46-.15-.65.15-.2.29-.75.93-.92 1.12-.17.2-.34.22-.63.08-.29-.15-1.22-.45-2.32-1.43-.86-.76-1.44-1.71-1.6-2-.17-.29-.02-.45.13-.6.13-.13.29-.34.44-.51.15-.17.2-.29.29-.48.1-.2.05-.37-.02-.51-.08-.15-.65-1.57-.9-2.15-.24-.57-.48-.5-.65-.5-.17 0-.37-.02-.56-.02-.2 0-.51.07-.78.37-.26.29-1.02 1-1.02 2.43 0 1.43 1.05 2.82 1.19 3.01.15.2 2.06 3.14 4.99 4.4.7.3 1.24.48 1.67.61.7.22 1.34.19 1.84.12.56-.08 1.7-.7 1.94-1.37.24-.68.24-1.26.17-1.37-.07-.12-.26-.2-.55-.34z"/><path d="M12.02 2C6.5 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.06-1.33A9.94 9.94 0 0 0 12.02 22C17.53 22 22 17.52 22 12S17.53 2 12.02 2zm0 18.1c-1.68 0-3.24-.47-4.57-1.28l-.33-.2-3.02.79.8-2.95-.21-.34a8.06 8.06 0 0 1-1.24-4.29c0-4.48 3.65-8.12 8.14-8.12 4.48 0 8.13 3.64 8.13 8.12 0 4.48-3.65 8.27-8.7 8.27z"/></svg>
+          </div>
+          <h3>WhatsApp</h3>
+          <p>Fale diretamente com a equipe AcadBio, conte sobre seu trabalho e receba um orçamento personalizado.</p>
+          <a id="contactWppBtn" href="#" target="_blank" rel="noopener" class="btn btn-primary" style="align-self:flex-start;">Iniciar conversa</a>
+        </div>
+
+        <div class="contact-card insta reveal">
+          <div class="ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+          </div>
+          <h3>Instagram</h3>
+          <p>Acompanhe dicas de metodologia, escrita científica e normas ABNT, além dos bastidores da consultoria.</p>
+          <a id="contactInstaBtn" href="https://www.instagram.com/consultoria.acadbio?utm_source=ig_web_button_share_sheet&igsi=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener" class="btn btn-ghost" style="align-self:flex-start;">@acadbio</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <img src="logo.png" alt="AcadBio">
+          <span>AcadBio</span>
+        </div>
+        <p class="footer-note">Consultoria acadêmica e científica para estudantes e pesquisadores de todo o Brasil — TCC, mestrado, doutorado e produção científica.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Navegação</h5>
+        <ul>
+          <li><a href="#sobre">Quem somos</a></li>
+          <li><a href="#servicos">Serviços</a></li>
+          <li><a href="#para-quem">Para quem</a></li>
+          <li><a href="#como-funciona">Como funciona</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Contato</h5>
+        <ul>
+          <li><a id="footerWppBtn" href="#" target="_blank" rel="noopener">WhatsApp</a></li>
+          <li><a id="footerInstaBtn" href="#" target="_blank" rel="noopener">Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> AcadBio — Consultoria acadêmica e científica.</span>
+      <span>Atendimento 100% online · Todo o Brasil</span>
+    </div>
+  </div>
+</footer>
+
+<a class="wpp-float" id="floatWppBtn" href="#" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.29-.15-1.7-.84-1.97-.93-.26-.1-.46-.15-.65.15-.2.29-.75.93-.92 1.12-.17.2-.34.22-.63.08-.29-.15-1.22-.45-2.32-1.43-.86-.76-1.44-1.71-1.6-2-.17-.29-.02-.45.13-.6.13-.13.29-.34.44-.51.15-.17.2-.29.29-.48.1-.2.05-.37-.02-.51-.08-.15-.65-1.57-.9-2.15-.24-.57-.48-.5-.65-.5-.17 0-.37-.02-.56-.02-.2 0-.51.07-.78.37-.26.29-1.02 1-1.02 2.43 0 1.43 1.05 2.82 1.19 3.01.15.2 2.06 3.14 4.99 4.4.7.3 1.24.48 1.67.61.7.22 1.34.19 1.84.12.56-.08 1.7-.7 1.94-1.37.24-.68.24-1.26.17-1.37-.07-.12-.26-.2-.55-.34z"/><path d="M12.02 2C6.5 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.06-1.33A9.94 9.94 0 0 0 12.02 22C17.53 22 22 17.52 22 12S17.53 2 12.02 2zm0 18.1c-1.68 0-3.24-.47-4.57-1.28l-.33-.2-3.02.79.8-2.95-.21-.34a8.06 8.06 0 0 1-1.24-4.29c0-4.48 3.65-8.12 8.14-8.12 4.48 0 8.13 3.64 8.13 8.12 0 4.48-3.65 8.27-8.7 8.27z"/></svg>
+</a>
+
+<div class="photo-modal" id="photoModal" role="dialog" aria-modal="true" aria-label="Pré-visualização da foto" aria-hidden="true">
+  <button class="photo-modal-close" id="photoModalClose" type="button" aria-label="Fechar pré-visualização">&times;</button>
+  <img id="photoModalImage" src="" alt="">
+</div>
+
+<script>
+  // =====================================================================
+  // CONFIGURAÇÃO — troque pelos dados reais da AcadBio
+  // =====================================================================
+  const CONFIG = {
+    whatsappNumber: "5592996098308", // formato: 55 + DDD + número, somente dígitos
+    whatsappMessage: "Olá! Encontrei a AcadBio pelo site e gostaria de saber mais sobre a consultoria acadêmica.",
+    instagramHandle: "acadbio" // sem o @
+  };
+
+  const wppUrl = `https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(CONFIG.whatsappMessage)}`;
+  const instaUrl = `https://www.instagram.com/consultoria.acadbio?utm_source=ig_web_button_share_sheet&igsi=ZDNlZDc0MzIxNw==${CONFIG.instagramHandle}`;
+
+  document.querySelectorAll('#navWppBtn, #heroWppBtn, #ctaWppBtn, #contactWppBtn, #footerWppBtn, #floatWppBtn')
+    .forEach(el => el && el.setAttribute('href', wppUrl));
+  document.querySelectorAll('#contactInstaBtn, #footerInstaBtn')
+    .forEach(el => el && el.setAttribute('href', instaUrl));
+
+  // Header shadow on scroll
+  const header = document.getElementById('siteHeader');
+  const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 12);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // Mobile menu
+  const burger = document.getElementById('burgerBtn');
+  const navLinks = document.getElementById('navLinks');
+  burger.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  // Reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => io.observe(el));
+  } else {
+    revealEls.forEach(el => el.classList.add('in'));
+  }
+
+  // Enlarged preview for responsible photos
+  const photoModal = document.getElementById('photoModal');
+  const photoModalImage = document.getElementById('photoModalImage');
+  const closePhotoModal = () => {
+    photoModal.classList.remove('open');
+    photoModal.setAttribute('aria-hidden', 'true');
+    photoModalImage.removeAttribute('src');
+  };
+  document.querySelectorAll('.team-photo').forEach(photoButton => {
+    photoButton.addEventListener('click', () => {
+      const photo = photoButton.querySelector('img');
+      if (!photo || photo.style.display === 'none') return;
+      photoModalImage.src = photo.src;
+      photoModalImage.alt = photo.alt;
+      photoModal.classList.add('open');
+      photoModal.setAttribute('aria-hidden', 'false');
+    });
+  });
+  document.getElementById('photoModalClose').addEventListener('click', closePhotoModal);
+  photoModal.addEventListener('click', event => {
+    if (event.target === photoModal) closePhotoModal();
+  });
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && photoModal.classList.contains('open')) closePhotoModal();
+  });
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
