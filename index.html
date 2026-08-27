@@ -304,10 +304,10 @@
     font-family:var(--mono); font-size:12px; color:var(--navy-800);
     background:#fff; border:1px solid var(--line); border-radius:4px; padding:7px 12px;
   }
-  .team-block{margin-top:42px; padding-top:30px; border-top:1px solid var(--line);}
+  .team-block{grid-column:1 / -1; margin-top:42px; padding-top:30px; border-top:1px solid var(--line); text-align:center;}
   .team-block h3{font-size:21px; margin-bottom:7px;}
   .team-intro{color:var(--ink-soft); font-size:14px; margin-bottom:20px;}
-  .team-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:14px;}
+  .team-grid{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px; max-width:900px; margin:0 auto; text-align:left;}
   .team-card{background:#fff; border:1px solid var(--line); border-radius:9px; overflow:hidden;}
   .team-photo{
     aspect-ratio:1 / 1; background:var(--paper-2); color:var(--gold-600);
@@ -476,7 +476,6 @@
     .hero-grid{grid-template-columns:1fr; gap:52px;}
     .hero-art{order:-1; max-width:360px; margin:0 auto;}
     .about-grid{grid-template-columns:1fr; gap:36px;}
-    .team-grid{max-width:560px;}
     .services-groups{grid-template-columns:1fr;}
     .audience-grid{grid-template-columns:repeat(2,1fr);}
     .process{grid-template-columns:repeat(2,1fr); row-gap:36px;}
@@ -488,10 +487,11 @@
   }
   @media (max-width:760px){
     .nav-links{
-      position:fixed; top:70px; left:0; right:0; bottom:0;
-      background:var(--paper); flex-direction:column; align-items:flex-start; gap:0;
+      position:fixed; top:70px; left:0; right:0; bottom:0; z-index:1001;
+      background-color:#faf8f3; flex-direction:column; align-items:flex-start; gap:0;
       padding:10px 28px 30px; transform:translateY(-110%); opacity:0;
       transition:transform .3s ease, opacity .3s ease; pointer-events:none;
+      box-shadow:0 12px 24px -18px rgba(12,33,65,.45);
     }
     .nav-links.open{transform:translateY(0); opacity:1; pointer-events:auto;}
     .nav-links a{width:100%; padding:14px 0; border-bottom:1px solid var(--line);}
@@ -593,7 +593,7 @@
           <div class="sig">AcadBio · Consultoria Acadêmica</div>
         </div>
         <div class="about-copy reveal">
-          <span class="eyebrow"><span class="idx">01</span> <span class="who">Quem</span> <span class="are">somos</span><span class="question-mark">?</span></span>
+          <span class="eyebrow"><span class="idx">01</span><span class="eyebrow">Quem somos</span><span class="question-mark">?</span></span>
           <h2 style="font-size:32px; margin-bottom:20px;">Consultoria acadêmica pensada para cada etapa da sua trajetória científica</h2>
           <p>A <strong>AcadBio</strong> é uma consultoria acadêmica e científica que atende, de forma 100% online, estudantes e pesquisadores de todo o Brasil — da graduação à pós-graduação stricto sensu.</p>
           <p>Unimos <strong>experiência acadêmica</strong> e <strong>produção científica</strong> a um acompanhamento próximo e individualizado, para transformar ideias soltas em trabalhos bem estruturados, metodologicamente consistentes e dentro das normas exigidas.</p>
@@ -605,27 +605,27 @@
             <span>Mestrado &amp; doutorado</span>
             <span>Atendimento nacional</span>
           </div>
-          <div class="team-block">
-            <h3>Responsáveis pelo serviço</h3>
-            <p class="team-intro">Conheça quem acompanha cada etapa do seu trabalho.</p>
-            <div class="team-grid">
-              <figure class="team-card">
-                <button class="team-photo" type="button" aria-label="Ampliar foto do responsável 1"><span>Adicionar foto</span><img src="responsavel-1.png" alt="Foto do responsável 1" onerror="this.style.display='none'"></button>
-                <figcaption><strong>Dra. Jordana Sarkis</strong><span>Mentora e Consultora na AcadBio</span></figcaption>
-              </figure>
-              <figure class="team-card">
-                <button class="team-photo" type="button" aria-label="Ampliar foto do responsável 2"><span>Adicionar foto</span><img src="responsavel-2.png" alt="Foto do responsável 2" onerror="this.style.display='none'"></button>
-                <figcaption><strong>Dra. Ogla Anakarina</strong><span>Mentora e Consultora na AcadBio</span></figcaption>
-              </figure>
-              <figure class="team-card">
-                <button class="team-photo" type="button" aria-label="Ampliar foto do responsável 3"><span>Adicionar foto</span><img src="responsavel-3.png" alt="Foto do responsável 3" onerror="this.style.display='none'"></button>
-                <figcaption><strong>Dr. Bruno Nascimento</strong><span>Mentor e Consultor Acadêmico na AcadBio</span></figcaption>
-              </figure>
-              <figure class="team-card">
-                <button class="team-photo" type="button" aria-label="Ampliar foto do responsável 4"><span>Adicionar foto</span><img src="responsavel-4.jpeg" alt="Foto do responsável 4" onerror="this.style.display='none'"></button>
-                <figcaption><strong>Dra. Suelen Cristina</strong><span>Mentora e Consultora na AcadBio</span></figcaption>
-              </figure>
-            </div>
+        </div>
+        <div class="team-block">
+          <h3 class="eyebrow">Responsáveis pelo serviço</h3>
+          <p class="team-intro">Conheça quem acompanha cada etapa do seu trabalho.</p>
+          <div class="team-grid">
+            <figure class="team-card">
+              <button class="team-photo" type="button" aria-label="Ampliar foto do responsável 1"><span>Adicionar foto</span><img src="responsavel-1.png" alt="Foto do responsável 1" onerror="this.style.display='none'"></button>
+              <figcaption><strong>Dra. Jordana Sarkis</strong><span>Mentora e Consultora na AcadBio</span></figcaption>
+            </figure>
+            <figure class="team-card">
+              <button class="team-photo" type="button" aria-label="Ampliar foto do responsável 2"><span>Adicionar foto</span><img src="responsavel-2.png" alt="Foto do responsável 2" onerror="this.style.display='none'"></button>
+              <figcaption><strong>Dra. Ogla Anakarina</strong><span>Mentora e Consultora na AcadBio</span></figcaption>
+            </figure>
+            <figure class="team-card">
+              <button class="team-photo" type="button" aria-label="Ampliar foto do responsável 3"><span>Adicionar foto</span><img src="responsavel-3.png" alt="Foto do responsável 3" onerror="this.style.display='none'"></button>
+              <figcaption><strong>Dr. Bruno Nascimento</strong><span>Mentor e Consultor Acadêmico na AcadBio</span></figcaption>
+            </figure>
+            <figure class="team-card">
+              <button class="team-photo" type="button" aria-label="Ampliar foto do responsável 4"><span>Adicionar foto</span><img src="responsavel-4.jpeg" alt="Foto do responsável 4" onerror="this.style.display='none'"></button>
+              <figcaption><strong>Dra. Suelen Cristina</strong><span>Mentora e Consultora na AcadBio</span></figcaption>
+            </figure>
           </div>
         </div>
       </div>
