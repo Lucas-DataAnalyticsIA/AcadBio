@@ -63,9 +63,9 @@
     align-items:center;
     gap:8px;
     font-family:var(--mono);
-    font-size:12.5px;
+    font-size:40px;
     font-weight:600;
-    letter-spacing:.04em;
+    /* letter-spacing:.04em; */
     color:var(--gold-600);
     margin-bottom:16px;
   }
@@ -202,8 +202,9 @@
     font-size:17.5px; color:var(--ink-soft); max-width:520px; margin-bottom:34px;
   }
   .hero-actions{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:38px;}
+  
   .trust-row{
-    display:flex; gap:26px; flex-wrap:wrap; padding-top:26px; border-top:1px solid var(--line);
+    display:grid; grid-template-columns:repeat(3,1fr); gap:20px; padding-top:26px; border-top:1px solid var(--line);
   }
   .trust-item{display:flex; align-items:center; gap:9px; font-size:13.5px; color:var(--ink-soft); font-weight:500;}
   .trust-item svg{width:17px; height:17px; color:var(--gold-600); flex-shrink:0;}
@@ -211,6 +212,17 @@
   .hero-art{
     position:relative;
     display:flex; align-items:center; justify-content:center;
+    flex-direction:column;
+    gap:18px;
+  }
+  .hero-logo-frame{
+    width:400px; height: 300px; max-width:100%;
+    display:flex; align-items:center; justify-content:center;
+    background:transparent; 
+    /* box-shadow:0 14px 30px -18px rgba(12,33,65,.45); */
+  }
+  .hero-logo{
+    width:400px; height: 300px; object-fit:contain;
   }
   .hero-card{
     position:relative;
@@ -295,7 +307,7 @@
   .team-block{margin-top:42px; padding-top:30px; border-top:1px solid var(--line);}
   .team-block h3{font-size:21px; margin-bottom:7px;}
   .team-intro{color:var(--ink-soft); font-size:14px; margin-bottom:20px;}
-  .team-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:14px;}
+  .team-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:14px;}
   .team-card{background:#fff; border:1px solid var(--line); border-radius:9px; overflow:hidden;}
   .team-photo{
     aspect-ratio:1 / 1; background:var(--paper-2); color:var(--gold-600);
@@ -310,6 +322,9 @@
   .team-card figcaption{padding:12px 13px 14px;}
   .team-card strong{display:block; color:var(--navy-950); font-family:var(--serif); font-size:15px;}
   .team-card span{display:block; color:var(--ink-soft); font-size:12px; margin-top:2px;}
+  .about-copy .eyebrow .who{color:var(--gold-500);}
+  .about-copy .eyebrow .are{color:var(--navy-950);}
+  .about-copy .eyebrow .question-mark{display:inline-block; color:var(--gold-600); font-family:var(--serif); font-size:1.35em; font-style:italic; font-weight:700; margin-left:2px; transform:rotate(8deg);}
 
   /* ================= SERVIÇOS ================= */
   .services-groups{
@@ -490,7 +505,9 @@
     .process{grid-template-columns:1fr;}
     .team-grid{grid-template-columns:repeat(2,1fr);}
     .cta-strip{padding:40px 26px;}
-    .trust-row{gap:16px;}
+    .trust-row{gap:10px;}
+    .trust-item{gap:5px; font-size:11px; line-height:1.35;}
+    .trust-item svg{width:15px; height:15px;}
   }
 </style>
 </head>
@@ -503,10 +520,10 @@
       <span class="brand-name">Acad<span>Bio</span></span>
     </a>
     <nav class="nav-links" id="navLinks">
-      <a href="#sobre">Quem somos</a>
+      <a href="#sobre">Quem somos?</a>
       <a href="#servicos">Serviços</a>
-      <a href="#para-quem">Para quem</a>
-      <a href="#como-funciona">Como funciona</a>
+      <a href="#para-quem">Para quem?</a>
+      <a href="#como-funciona">Como funciona?</a>
       <a href="#contato">Contato</a>
     </nav>
     <div class="nav-cta">
@@ -528,7 +545,7 @@
   <section class="hero">
     <div class="wrap hero-grid">
       <div class="hero-copy reveal">
-        <span class="eyebrow"><span class="idx">est.</span> Consultoria acadêmica e científica</span>
+        <span class="eyebrow"> Consultoria acadêmica e científica</span>
         <h1>Sua pesquisa merece <em>rigor</em>, clareza e um bom orientador ao lado.</h1>
         <p class="lede">A AcadBio presta consultoria acadêmica em todo o Brasil: da estrutura do TCC à defesa de mestrado e doutorado, do primeiro rascunho à normalização ABNT. Atendimento individual, online e sob sigilo.</p>
         <div class="hero-actions">
@@ -555,8 +572,10 @@
       </div>
 
       <div class="hero-art reveal">
+        <div class="hero-logo-frame">
+          <img src="logo.png" class="hero-logo" width="326" height="204" alt="AcadBio">
+        </div>
         <div class="hero-card">
-          <img src="logo.png" class="logo-mini" alt="">
           <span class="quote-mark">&ldquo;</span>
           <blockquote>Metodologia clara e texto bem estruturado não são detalhes — são o que sustenta uma pesquisa.</blockquote>
           <div class="ref">AcadBio — Consultoria Acadêmica e Científica</div>
@@ -574,10 +593,10 @@
           <div class="sig">AcadBio · Consultoria Acadêmica</div>
         </div>
         <div class="about-copy reveal">
-          <span class="eyebrow"><span class="idx">01</span> Quem somos</span>
+          <span class="eyebrow"><span class="idx">01</span> <span class="who">Quem</span> <span class="are">somos</span><span class="question-mark">?</span></span>
           <h2 style="font-size:32px; margin-bottom:20px;">Consultoria acadêmica pensada para cada etapa da sua trajetória científica</h2>
           <p>A <strong>AcadBio</strong> é uma consultoria acadêmica e científica que atende, de forma 100% online, estudantes e pesquisadores de todo o Brasil — da graduação à pós-graduação stricto sensu.</p>
-          <p>Unimos <strong>experiência acadêmica</strong> em ciências biomédicas e produção científica a um acompanhamento próximo e individualizado, para transformar ideias soltas em trabalhos bem estruturados, metodologicamente consistentes e dentro das normas exigidas.</p>
+          <p>Unimos <strong>experiência acadêmica</strong> e <strong>produção científica</strong> a um acompanhamento próximo e individualizado, para transformar ideias soltas em trabalhos bem estruturados, metodologicamente consistentes e dentro das normas exigidas.</p>
           <p>Trabalhamos com trabalhos de conclusão de curso, projetos de pesquisa, pré-projetos para mestrado e doutorado, artigos científicos, revisão textual e normalização ABNT — sempre com prazos, escopo e orçamento definidos antes de começar.</p>
           <div class="about-tags">
             <span>Metodologia científica</span>
@@ -592,19 +611,19 @@
             <div class="team-grid">
               <figure class="team-card">
                 <button class="team-photo" type="button" aria-label="Ampliar foto do responsável 1"><span>Adicionar foto</span><img src="responsavel-1.png" alt="Foto do responsável 1" onerror="this.style.display='none'"></button>
-                <figcaption><strong>Jordana Sarkis</strong><span>Consultora acadêmica na AcadBio</span></figcaption>
+                <figcaption><strong>Dra. Jordana Sarkis</strong><span>Mentora e Consultora na AcadBio</span></figcaption>
               </figure>
               <figure class="team-card">
                 <button class="team-photo" type="button" aria-label="Ampliar foto do responsável 2"><span>Adicionar foto</span><img src="responsavel-2.png" alt="Foto do responsável 2" onerror="this.style.display='none'"></button>
-                <figcaption><strong>Ogla Anakarina</strong><span>Sócia, Mentora e Consultora Acadêmica na AcadBio</span></figcaption>
+                <figcaption><strong>Dra. Ogla Anakarina</strong><span>Mentora e Consultora na AcadBio</span></figcaption>
               </figure>
               <figure class="team-card">
                 <button class="team-photo" type="button" aria-label="Ampliar foto do responsável 3"><span>Adicionar foto</span><img src="responsavel-3.png" alt="Foto do responsável 3" onerror="this.style.display='none'"></button>
-                <figcaption><strong>Bruno Nascimento</strong><span>Mentor e consultor Acadêmico na AcadBio</span></figcaption>
+                <figcaption><strong>Dr. Bruno Nascimento</strong><span>Mentor e Consultor Acadêmico na AcadBio</span></figcaption>
               </figure>
               <figure class="team-card">
-                <button class="team-photo" type="button" aria-label="Ampliar foto do responsável 4"><span>Adicionar foto</span><img src="responsavel-4.png" alt="Foto do responsável 4" onerror="this.style.display='none'"></button>
-                <figcaption><strong>Suelen Cristina</strong><span>Mentora e Consultora Acadêmica na AcadBio</span></figcaption>
+                <button class="team-photo" type="button" aria-label="Ampliar foto do responsável 4"><span>Adicionar foto</span><img src="responsavel-4.jpeg" alt="Foto do responsável 4" onerror="this.style.display='none'"></button>
+                <figcaption><strong>Dra. Suelen Cristina</strong><span>Mentora e Consultora na AcadBio</span></figcaption>
               </figure>
             </div>
           </div>
@@ -617,7 +636,7 @@
   <section class="section section-alt" id="servicos">
     <div class="wrap">
       <div class="section-head reveal">
-        <span class="eyebrow"><span class="idx">02</span> O que fazemos</span>
+        <span class="eyebrow"><span class="idx">02</span> O que fazemos?</span>
         <h2>Serviços</h2>
         <p>Um catálogo objetivo de apoio acadêmico, organizado por etapa da sua pesquisa — do rascunho inicial à publicação.</p>
       </div>
@@ -688,7 +707,7 @@
     <div class="wrap">
       <div class="section-head reveal">
         <span class="eyebrow"><span class="idx">03</span> Público</span>
-        <h2>Para quem é a AcadBio</h2>
+        <h2>Para quem é a AcadBio?</h2>
         <p>Atendemos diferentes momentos da vida acadêmica — sempre com o mesmo nível de atenção e rigor.</p>
       </div>
       <div class="audience-grid">
@@ -721,7 +740,7 @@
     <div class="wrap">
       <div class="section-head reveal">
         <span class="eyebrow"><span class="idx">04</span> Processo</span>
-        <h2>Como funciona</h2>
+        <h2>Como funciona?</h2>
         <p>Um processo simples, transparente e sem letras miúdas — do primeiro contato ao acompanhamento contínuo.</p>
       </div>
       <div class="process">
@@ -772,7 +791,7 @@
     <div class="wrap">
       <div class="section-head reveal">
         <span class="eyebrow"><span class="idx">05</span> Contato</span>
-        <h2>Vamos conversar sobre a sua pesquisa</h2>
+        <h2>Vamos conversar sobre a sua pesquisa?</h2>
         <p>Atendimento direto, sem intermediários. Escolha o canal de sua preferência.</p>
       </div>
 
@@ -814,10 +833,10 @@
       <div class="footer-col">
         <h5>Navegação</h5>
         <ul>
-          <li><a href="#sobre">Quem somos</a></li>
+          <li><a href="#sobre">Quem somos?</a></li>
           <li><a href="#servicos">Serviços</a></li>
-          <li><a href="#para-quem">Para quem</a></li>
-          <li><a href="#como-funciona">Como funciona</a></li>
+          <li><a href="#para-quem">Para quem?</a></li>
+          <li><a href="#como-funciona">Como funciona?</a></li>
         </ul>
       </div>
       <div class="footer-col">
